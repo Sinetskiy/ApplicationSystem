@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Applications";
+}
+<div class="panel panel-default">
+    <div class="panel-body" data-ng-app="applicationApp" data-ng-controller="applicationCtrl" data-ng-init="getApplications()" > 
+        <div style="padding: 10px;">
+            <div class="form-group">
+               <input class="form-control" placeholder="Client name" type="text" name="application.clientname" data-ng-model="application.ClientName" value="{{application.ClientName}}" />
+            </div>
+            <div class="form-group">
+               <input class="form-control" placeholder="Client email" type="text" name="application.clientemail" data-ng-model="application.ClientEmail" value="{{application.ClientEmail}}" />
+            </div>
+            <div class="form-group">
+               <select name="application.status" data-ng-model="application.Status" data-ng-options="v as v.name for v in selectVals"></select>
+            </div>
+            <div class="form-group">
+            <label>Application</label>
+                <textarea class="form-control" rows="3" name="application.Text" data-ng-model="application.Text" ></textarea>
+            </div>
+            <button class="btn btn-primary btn-sm" name="btnSend" data-ng-click="createApplication(application)">Send</button>
+            &nbsp;
+            <button class="btn btn-primary btn-sm" name="btnUpdate" data-ng-click="updateApplication(application)">Update</button>
+            &nbsp;
+            <button class="btn btn-primary btn-sm" name="btnDelete" data-ng-click="deleteApplication(application.ApplicationId)">Delete</button>
+        </div>
+
+        <table class="table table-striped table-bordered text-center" >
+            <tr>
+                <th>Client name</th>
+                <th>Client email</th>
+                <th>Text</th>
+                <th>Create on</th>
+                <th>Status</th>
+                <th>Select</th>
+                <th>Delete</th>
+            </tr>
+            <tr data-ng-repeat="app in applications">
+                <td>{{app.ClientName}}</td>
+                <td>{{app.ClientEmail}}</td>
+                <td>{{app.Text}}</td>
+                <td>{{app.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{app.Status}}</td>
+                <td><a href="#" data-ng-click="selectApplication(app.ApplicationId)" >Select</a></td>
+                <td><a href="#" data-ng-click="deleteApplication(app.ApplicationId)" >Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
